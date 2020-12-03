@@ -28,6 +28,7 @@ docker build -t nginx srcs/nginx/
 docker build -t mysql srcs/mysql/
 
 
+docker run -v /sys/fs/cgroup your_image
 
 
 
