@@ -1,5 +1,4 @@
-CREATE DATABASE app;
-CREATE USER 'app'@'%';
-SET password FOR "app"@"%" = password('password');
-GRANT ALL PRIVILEGES ON app.* TO 'app'@'%' identified by 'password';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+CREATE DATABASE `wordpress`;
+GRANT ALL ON *.* TO 'root'@'%' identified by 'password' WITH GRANT OPTION ;
 FLUSH PRIVILEGES;
