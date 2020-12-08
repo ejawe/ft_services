@@ -1,8 +1,8 @@
 #avoir les permissions sur docker sans sudo
-sudo usermod -aG docker $USER && newgrp docker
+#sudo usermod -aG docker $USER && newgrp docker
 
 #############################################
-minikube delete
+#minikube delete
 #docker stop $(docker ps -a -q)
 #docker rm $(docker ps -a -q)
 #############################################
@@ -27,6 +27,7 @@ kubectl apply -f srcs/metallb/metallb_config.yaml
 docker build -t nginx srcs/nginx/
 docker build -t mysql srcs/mysql/
 docker build -t wordpress srcs/wordpress/
+docker build -t phpmyadmin srcs/phpmyadmin/
 
 #docker run -v /sys/fs/cgroup your_image
 

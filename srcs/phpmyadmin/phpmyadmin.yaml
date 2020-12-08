@@ -1,18 +1,20 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: phpmyadmin-service
   annotations:
     metallb.universe.tf/allow-shared-ip: "true"
+  name: phpmyadmin
 spec:
   type: LoadBalancer
   selector:
     app: phpmyadmin
   ports:
-  - protocol: TCP
-    port: 5000
-    targetPort: 80
+  - port: 5000
+    targetPort: 5000
+    name: phpmyadmin
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,32 +22,27 @@ metadata:
   labels:
     app: phpmyadmin
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: phpmyadmin
-  strategy:
-    type: Recreate
-  replicas: 1
   template:
     metadata:
       labels:
         app: phpmyadmin
     spec:
       containers:
-      - image:  phpmyadmin/phpmyadmin
-        #imagePullPolicy: Always
-        name: phpmyadmin
+      - name: phpmyadmin
+        image: phpmyadmin
+        imagePullPolicy: Never
         ports:
-        - containerPort: 80
-          name: phpmyadmin
+        - containerPort: 5000
         env:
-          - name: MYSQL_HOSTNAME
-            value: mysql
           - name: PMA_HOST
             value: mysql
           - name: PMA_PORT
             value: "3306"
-          - name: PMA_USERNAME
+          - name: PMA_USER
             value: root
-          - name: PMA_PASSWORD
+          - name: MYSQL_ROOT_PASSWORD
             value: password
