@@ -29,6 +29,10 @@ docker build -t mysql srcs/mysql/
 docker build -t wordpress srcs/wordpress/
 docker build -t phpmyadmin srcs/phpmyadmin/
 
+#docker build -t telegraf srcs/telegraf/
+#docker build -t grafana srcs/grafana/
+#docker build -t influxdb srcs/influxdb/
+
 #docker run -v /sys/fs/cgroup your_image
 
 
@@ -40,4 +44,7 @@ sleep 1
 kubectl apply -f srcs/wordpress/wordpress.yaml
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
+#kubectl apply -f srcs/telegraf/telegraf.yaml
+#kubectl apply -f srcs/grafana/grafana.yaml
+#kubectl apply -f srcs/influxdb/influxdb.yaml
 kubectl get all

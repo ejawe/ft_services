@@ -7,7 +7,7 @@ RUN	apk update && apk add nginx ; \
 #dossier nécessaire pour le fichier nginx.pid (run/nginx/nginx.pid)
 RUN	mkdir -p /run/nginx
 
-COPY index.html /www/
+COPY index.html /var/www/
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
