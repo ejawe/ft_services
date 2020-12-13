@@ -5,9 +5,9 @@ RUN	apk update && apk add nginx ; \
 	apk add --no-cache openrc openssl openssh
 
 #dossier nécessaire pour le fichier nginx.pid (run/nginx/nginx.pid)
-RUN	mkdir -p /run/nginx
+RUN	mkdir -p var/run/nginx
 
-COPY index.html /var/www/
+COPY index.html /www/
 
 COPY nginx.conf /etc/nginx/nginx.conf
 

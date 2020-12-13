@@ -24,14 +24,22 @@ kubectl apply -f srcs/metallb/metallb_config.yaml
 
 
 #minikube addons list
+minikube addons enable metrics-server
+minikube addons enable logviewer
+minikube addons enable dashboard
+minikube addons enable metrics-server
+
+
+
 docker build -t nginx srcs/nginx/
 docker build -t mysql srcs/mysql/
 docker build -t wordpress srcs/wordpress/
 docker build -t phpmyadmin srcs/phpmyadmin/
 
-#docker build -t telegraf srcs/telegraf/
-#docker build -t grafana srcs/grafana/
-#docker build -t influxdb srcs/influxdb/
+docker build -t influxdb srcs/influxdb/
+docker build -t telegraf srcs/telegraf/
+docker build -t grafana srcs/grafana/
+
 
 #docker run -v /sys/fs/cgroup your_image
 
@@ -44,7 +52,12 @@ sleep 1
 kubectl apply -f srcs/wordpress/wordpress.yaml
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
-#kubectl apply -f srcs/telegraf/telegraf.yaml
-#kubectl apply -f srcs/grafana/grafana.yaml
-#kubectl apply -f srcs/influxdb/influxdb.yaml
+kubectl apply -f srcs/telegraf/telegraf.yaml
+kubectl apply -f srcs/grafana/grafana.yaml
+kubectl apply -f srcs/influxdb/influxdb.yaml
+
+#to creata de grafana.db file
+#kubectl cp grafana-d4f77759-vwbc9:grafana/data/ /home/ejawe/Documents/42/ft_services
+
+sleep 5
 kubectl get all
