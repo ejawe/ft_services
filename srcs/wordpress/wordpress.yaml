@@ -4,10 +4,13 @@ metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: "true"
   name: wordpress
+  labels:
+    app: wordpress
 spec:
   type: LoadBalancer
   selector:
     app: wordpress
+    tier: frontend
   ports:
   - port: 5050
     targetPort: 5050
@@ -18,7 +21,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-deployment
+  name: wordpress
   labels:
     app: wordpress
 spec:
@@ -26,10 +29,14 @@ spec:
   selector:
     matchLabels:
       app: wordpress
+      tier: frontend
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: wordpress
+        tier: frontend
     spec:
       containers:
       - name: wordpress
@@ -37,3 +44,4 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5050
+          name: wordpress
