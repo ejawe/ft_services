@@ -1,6 +1,6 @@
 <?php
 
-$cfg['blowfish_secret'] = '';
+$cfg['blowfish_secret'] = 'BSUILUSoijzidbuziefuzpazaqSVBNWCM'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! *
 
 /**
  * List of env variables
@@ -32,8 +32,13 @@ $cfg['Servers'][$i]['auth_type'] = 'cookie';
 /* Server parameters */
 $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['host'] = 'mysql';
-$cfg['Servers'][$i]['AllowNoPassword'] = true;
-$cfg['PmaAbsoluteUri'] = '/phpmyadmin';
+$cfg['Servers'][$i]['AllowNoPassword'] = true; ###
+$cfg['PmaAbsoluteUri'] = 'phpmyadmin-service:5000';
+
+#sets SameSite attribute of the Set-Cookie HTTP response header
+#$cfg['CookieSameSite'] = 'Strict';
+
+#$cfg['TempDir'] = '/var/www/phpmyadmin/tmp/'; ######
 /**
  * Variable definition
  */
@@ -51,3 +56,4 @@ if (!empty($_ENV['MYSQL_ROOT_PASSWORD']))
 
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+

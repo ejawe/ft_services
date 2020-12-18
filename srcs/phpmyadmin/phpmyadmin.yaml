@@ -3,15 +3,15 @@ kind: Service
 metadata:
   annotations:
     metallb.universe.tf/allow-shared-ip: "true"
-  name: phpmyadmin
+  name: phpmyadmin-service
 spec:
   type: LoadBalancer
   selector:
     app: phpmyadmin
   ports:
-  - port: 5000
+  - protocol: TCP
+    port: 5000
     targetPort: 5000
-    name: phpmyadmin
 
 ---
 

@@ -15,7 +15,7 @@ COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
 
 COPY ./srcs/wp-config.php var/www/wordpress/
 
-RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/nginx-selfsigned.key -out /etc/nginx/nginx-selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Company/OU=42/CN=mywebsite.com" 
+#RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/nginx-selfsigned.key -out /etc/nginx/nginx-selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Company/OU=42/CN=mywebsite.com" 
 
 COPY ./srcs/start.sh .
 RUN	chmod +x start.sh

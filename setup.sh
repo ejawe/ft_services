@@ -1,11 +1,13 @@
-#avoir les permissions sur docker sans sudo
-#sudo usermod -aG docker $USER && newgrp docker
+
 
 #############################################
-#minikube delete
+minikube delete
 #docker stop $(docker ps -a -q)
 #docker rm $(docker ps -a -q)
 #############################################
+#echo "$USER" | sudo -S chmod 666 /var/run/docker.sock
+#avoir les permissions sur docker sans sudo
+#sudo usermod -aG docker $USER && newgrp docker
 
 
 minikube start --vm-driver=docker #Spécification du pilote de machine virtuelle
@@ -36,10 +38,10 @@ docker build -t mysql srcs/mysql/
 docker build -t wordpress srcs/wordpress/
 docker build -t phpmyadmin srcs/phpmyadmin/
 
-docker build -t influxdb srcs/influxdb/
-docker build -t telegraf srcs/telegraf/
-docker build -t grafana srcs/grafana/
-docker build -t ftps srcs/ftps/
+#docker build -t influxdb srcs/influxdb/
+##docker build -t telegraf srcs/telegraf/
+#docker build -t grafana srcs/grafana/
+#docker build -t ftps srcs/ftps/
 
 #docker run -v /sys/fs/cgroup your_image
 
@@ -52,10 +54,10 @@ sleep 1
 kubectl apply -f srcs/wordpress/wordpress.yaml
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
-kubectl apply -f srcs/telegraf/telegraf.yaml
-kubectl apply -f srcs/grafana/grafana.yaml
-kubectl apply -f srcs/influxdb/influxdb.yaml
-kubectl apply -f srcs/ftps/ftps.yaml
+#kubectl apply -f srcs/telegraf/telegraf.yaml
+#kubectl apply -f srcs/grafana/grafana.yaml
+#kubectl apply -f srcs/influxdb/influxdb.yaml
+#kubectl apply -f srcs/ftps/ftps.yaml
 #to creata de grafana.db file
 #kubectl cp <grafana_pod>:grafana/data/grafana.db /home/ejawe/Documents/42/ft_services/srcs/grafana/grafana.db
 

@@ -18,10 +18,18 @@ RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-a
 RUN	mkdir -p var/run/nginx
 COPY ./srcs/index_nginx.html var/www/
 
+#RUN chmod -R 777 /var/lib/php7/session
+
 RUN	rm /etc/nginx/nginx.conf
 COPY ./srcs/nginx.conf /etc/nginx/nginx.conf
 
 COPY ./srcs/config.inc.php /var/www/phpmyadmin/config.inc.php
+
+#####
+#RUN mkdir var/www/phpmyadmin/tmp 
+#RUN chmod 775 -R var/www/phpmyadmin/tmp
+
+#RUN chown -R root:root /var/www/phpmyadmin/tmp
 
 RUN	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/nginx-selfsigned.key -out /etc/nginx/nginx-selfsigned.crt -subj "/C=FR/ST=IDF/L=Paris/O=Company/OU=42/CN=mywebsite.com" 
 
