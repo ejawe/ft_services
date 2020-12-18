@@ -4,4 +4,5 @@ if [[ ! -d "/var/lib/mysql/mysql" || ! -d "/var/lib/mysql/wordpress" || ! -d "/v
 then
 	mysql_install_db --datadir=/var/lib/mysql
     mysqld --user=root --init_file=/mysql.sql
+    mysqld --user=root wordpress < wordpress.sql
 fi
