@@ -7,10 +7,12 @@ metadata:
 spec:
   ports:
     - port: 3306
+      targetPort: 3306
+      protocol: TCP
   selector:
     app: wordpress
     tier: mysql
-  clusterIP: None #type: ClusterIP
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -44,6 +46,7 @@ spec:
         app: wordpress
         tier: mysql
     spec:
+      restartPolicy: Always
       containers:
       - image: mysql
         name: mysql
@@ -54,6 +57,13 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        livenessProbe:
+          exec:
+            command:
+              - /bin/ash
+              - /livenessprobe.sh
+          initialDelaySeconds: 15
+          periodSeconds: 3
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql

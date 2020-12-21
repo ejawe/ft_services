@@ -22,7 +22,8 @@ metadata:
   labels:
     app: phpmyadmin
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: phpmyadmin
@@ -46,3 +47,9 @@ spec:
             value: root
           - name: MYSQL_ROOT_PASSWORD
             value: password
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 5

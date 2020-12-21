@@ -25,7 +25,8 @@ metadata:
   labels:
     app: wordpress
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: wordpress
@@ -45,3 +46,9 @@ spec:
         ports:
         - containerPort: 5050
           name: wordpress
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5050
+          initialDelaySeconds: 15 #Kubelet qu'il devrait attendre 5 secondes avant d'effectuer la première probe
+          periodSeconds: 5 #Kubelet doit effectuer un check de liveness toutes les 5 secondes
