@@ -45,3 +45,9 @@ spec:
             name: http
           - containerPort: 443
             name: https
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 443
+          initialDelaySeconds: 15
+          periodSeconds: 5
